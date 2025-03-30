@@ -1,0 +1,15 @@
+def main():
+    print("Welcome to VetNote")
+
+    # Todo steps:
+    # 1. read the input/data files
+    # 2. process the data ie translate it into an LLM prompt
+    # 3. call the LLM
+    # 4. process the LLM output
+    # 5. write the output to a file in the solution folder
+    
+    # Fun stretch goal: add streamlit UI
+
+
+if __name__ == "__main__":
+    main()

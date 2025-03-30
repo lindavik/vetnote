@@ -10,6 +10,8 @@ jobs:
   setup:
     name: Set up Python and Install Dependencies
     runs-on: ubuntu-latest
+    outputs:
+      poetry-path: ${{ steps.setup-poetry.outputs.poetry-path }}
 
     steps:
       - name: Checkout code
@@ -21,6 +23,7 @@ jobs:
           python-version: 3.12
 
       - name: Install Poetry
+        id: setup-poetry
         run: |
           python -m pip install --upgrade pip
           pip install poetry
@@ -41,8 +44,6 @@ jobs:
 
       - name: Run Linter (flake8)
         run: poetry run flake8 vetnote tests
-        env:
-          PATH: "${{ runner.tool_cache }}/python/bin:${{ env.PATH }}"
 
   type-check:
     name: Type Checking
@@ -55,8 +56,6 @@ jobs:
 
       - name: Run Type Checking (mypy)
         run: poetry run mypy vetnote
-        env:
-          PATH: "${{ runner.tool_cache }}/python/bin:${{ env.PATH }}"
 
   test:
     name: Run Tests
@@ -68,9 +67,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Run Tests
-        run: poetry run pytest --cov=vetnote tests
-        env:
-          PATH: "${{ runner.tool_cache }}/python/bin:${{ env.PATH }}"
+        run: poetry run pytest --cov=vetnote --cov-report=xml tests
 
   security:
     name: Security Scan
@@ -83,5 +80,3 @@ jobs:
 
       - name: Run Security Scan (Bandit)
         run: poetry run bandit -r vetnote
-        env:
-          PATH: "${{ runner.tool_cache }}/python/bin:${{ env.PATH }}"

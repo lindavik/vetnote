@@ -1,5 +1,7 @@
 import sys
 
+from vetnote.llm_client import LLMClient, OpenAIClient
+from vetnote.note_generator import NoteGenerator
 from vetnote.reader import FileReader
 
 
@@ -10,19 +12,27 @@ def main():
         sys.exit(1)
 
     file_path = sys.argv[1]
-    file_reader = FileReader()
+    file_content: str = ""
 
     try:
-        file_content = file_reader.read_file(file_path)
+        file_content = FileReader.read_file(file_path)
         print(f"Contents of the file:\n{file_content}")
     except FileNotFoundError as e:
-        print(f"An exception occured while reading the input files: {e}")
+        print(f"An exception occurred while reading the input files: {e}")
 
-    # 2. process the data ie translate it into an LLM prompt
-    # 3. call the LLM
-    # 4. process the LLM output, including error handling
-    # 5. include fallback, if first LLM call fails,
-    # depending on error retry and then pivot to second LLM
+    llm_client: LLMClient = OpenAIClient()
+    note_generator: NoteGenerator = NoteGenerator(
+        llm_client=llm_client,
+        instruction_file_path="vetnote/prompts/prompt.txt"
+    )
+
+    try:
+        discharge_notes = note_generator.generate_discharge_notes(input_text=file_content)
+        print(f"Discharge notes: {discharge_notes}")
+    except Exception as e:
+        print(f"An exception occurred while generating discharge notes: {e}")
+        sys.exit(1)
+
     # 6. write the output to a file in the solution folder
 
 

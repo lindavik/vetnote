@@ -26,6 +26,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install poetry
+          echo "::add-path::$(poetry env info --path)/bin"
 
       - name: Install Dependencies
         run: poetry install --with dev

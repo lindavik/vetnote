@@ -1,0 +1,24 @@
+[project]
+name = "vetnote"
+version = "0.1.0"
+description = "A veterinary consultation summarisation tool, generated as part of the NordHealth recruitment process."
+authors = [
+    {name = "lindavik",email = "linda.viksne@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.5"
+pytest-cov = "^6.0.0"
+mypy = "^1.15.0"
+flake8 = "^7.2.0"
+bandit = "^1.8.3"
+

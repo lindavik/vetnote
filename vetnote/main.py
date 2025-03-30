@@ -8,15 +8,15 @@ def main():
         print("Usage: python main.py <input_file_path>")
         print("Please provide a file path")
         sys.exit(1)
-    
+
     file_path = sys.argv[1]
     file_reader = FileReader()
 
     try:
-      file_content = file_reader.read_file(file_path)
-      print(f"Contents of the file:\n{file_content}")
+        file_content = file_reader.read_file(file_path)
+        print(f"Contents of the file:\n{file_content}")
     except FileNotFoundError as e:
-        print(f"An exception occured while reading the input files: {e}")    
+        print(f"An exception occured while reading the input files: {e}")
 
     # 2. process the data ie translate it into an LLM prompt
     # 3. call the LLM

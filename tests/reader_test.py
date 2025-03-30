@@ -8,11 +8,11 @@ class TestFileReader:
     @pytest.fixture
     def file_reader(self) -> FileReader:
         return FileReader()
-    
+
     @pytest.fixture
     def expected_file_content(self):
         return (
-            '{\n'
+            "{\n"
             '  "patient": {\n'
             '    "name": "Darth Vader",\n'
             '    "species": "Dog (Canine - Domestic)",\n'
@@ -22,23 +22,24 @@ class TestFileReader:
             '    "date_of_birth": "2019-01-01",\n'
             '    "microchip": null,\n'
             '    "weight": "3.2 kg"\n'
-            '  },\n'
+            "  },\n"
             '  "consultation": {\n'
             '    "date": "2025-02-21",\n'
             '    "time": "12:37",\n'
             '    "reason": "Repeat Consultation",\n'
             '    "type": "Outpatient",\n'
             '    "clinical_notes": [\n'
-            '      {\n'
+            "      {\n"
             '        "type": "general",\n'
             '        "note": "Doing a lot better, '
-            'cough stopped\\nstarted running and '
-            'playing\\neats food without issues\\nseems better and more lively overall"\n'
-            '      }\n'
-            '    ],\n'
+            "cough stopped\\nstarted running and "
+            'playing\\neats food without '
+            'issues\\nseems better and more lively overall"\n'
+            "      }\n"
+            "    ],\n"
             '    "treatment_items": {\n'
             '      "procedures": [\n'
-            '        {\n'
+            "        {\n"
             '          "date": "2025-02-21",\n'
             '          "time": "12:45",\n'
             '          "name": "Consultation - Repeat",\n'
@@ -46,27 +47,34 @@ class TestFileReader:
             '          "quantity": 1,\n'
             '          "total_price": 6450,\n'
             '          "currency": "GBP"\n'
-            '        }\n'
-            '      ],\n'
+            "        }\n"
+            "      ],\n"
             '      "medicines": [],\n'
             '      "prescriptions": [],\n'
             '      "foods": [],\n'
             '      "supplies": []\n'
-            '    },\n'
+            "    },\n"
             '    "diagnostics": []\n'
-            '  }\n'
-            '}\n'
+            "  }\n"
+            "}\n"
         )
 
     def test_read_file_valid(self, file_reader, expected_file_content):
-        file_path = os.path.join(os.path.dirname(__file__), "data", "consultation.json")
-        
+        file_path = os.path.join(
+            os.path.dirname(__file__),
+            "data",
+            "consultation.json")
+
         actual_file_content = file_reader.read_file(file_path)
 
         assert actual_file_content == expected_file_content
 
     def test_read_file_not_found(self, file_reader):
-        file_path = os.path.join(os.path.dirname(__file__), "data", "non_existent.json")
+        file_path = os.path.join(
+            os.path.dirname(__file__),
+            "data",
+            "non_existent.json")
 
-        with pytest.raises(FileNotFoundError, match=f"File '{file_path}' not found."):
+        with pytest.raises(FileNotFoundError,
+                           match=f"File '{file_path}' not found."):
             file_reader.read_file(file_path)

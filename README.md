@@ -41,3 +41,19 @@ Solving this problem should take you no more than 2 hours.
 For all things that you come up with that aren't covered within the requirements above - we trust your judgement to 
 make the right decision. The solution is not meant to be perfect, but please 
 
+
+## Notes on the development process
+
+- The GitHub Actions have a lot of duplication but for a effort/gain perspective I decided to keep them as is now. They work and can be optimised, cached later;
+- I have chosen to read only a subset of the consultation data to objects instead of passing the whole data file because the data file can potentially containt PII/sensitive data and not everything needs to be passed to an LLM;
+- I am aware that consultation1.json has an error, ie an additional comma. To ensure the parsing strategy is a bit more "forgiving" I have chosen to use json5 instead of simply reading the json data. This is a deliberate choice to ensure the end users get some response even if the data format is not strictly right;
+
+
+## Future Development Opportunities
+
+- Depending on how this is meant to integrate in a production setting in the existing product, there are many ways to evolve this. 
+  - If this is really file based, you could set up a trigger on a file being placed in s3 and trigger a Lambda function (examples in AWS but this can be easily translated to other cloud providers) to generate a file and land it in the desired location;
+  - If this is part of a service, you would probably want to expose a RESTful API, e.g., FastAPI or equivalent to receive the input data, do the data processing and LLM calls and process them into a sensible response specified in an OpenAPI specification or equivalent;
+  - Since this does seem time sensitive, a batch job approach does not seem like a good fit for this use case;
+- I have found that demos tend to be quite useful, so either adding a small StreamLit demo on top of this or simply exposing a Swagger interface, could be great for this purpose;
+- For LLMs, it is essential to think about what happens when things go wrong, e.g., hitting quotas or if the third party LLM provider is down. What is the fallback strategy? Do you retry a few times (and with what retry logic) and then pivot to a different LLM? Or do you also maintain a more rudementary fallback option, just repeating the key parts of the consultation data?

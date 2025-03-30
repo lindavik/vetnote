@@ -8,8 +8,9 @@ def main():
     # 4. process the LLM output, including error handling
     # 5. include fallback, if first LLM call fails, depending on error retry and then pivot to second LLM
     # 5. write the output to a file in the solution folder
-    
+
     # Fun stretch goal: add streamlit UI
+
 
 
 if __name__ == "__main__":

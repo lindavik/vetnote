@@ -1,5 +1,5 @@
 [project]
-name = "aiengineerrecruitmentproject"
+name = "vetnote"
 version = "0.1.0"
 description = "A veterinary consultation summarisation tool, generated as part of the NordHealth recruitment process."
 authors = [
@@ -14,3 +14,7 @@ dependencies = [
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.5"
+

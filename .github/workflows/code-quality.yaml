@@ -11,7 +11,7 @@ jobs:
     name: Set up Python and Install Dependencies
     runs-on: ubuntu-latest
     outputs:
-      poetry-path: ${{ steps.setup-poetry.outputs.poetry-path }}
+      poetry-bin: ${{ steps.setup-poetry.outputs.poetry-bin }}
 
     steps:
       - name: Checkout code
@@ -27,6 +27,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install poetry
+          echo "::set-output name=poetry-bin::$(poetry env info --path)/bin"
         env:
           PATH: "${{ runner.tool_cache }}/python/bin:${{ env.PATH }}"
 
@@ -42,6 +43,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Add Poetry to PATH
+        run: echo "${{ needs.setup.outputs.poetry-bin }}" >> $GITHUB_PATH
+
       - name: Run Linter (flake8)
         run: poetry run flake8 vetnote tests
 
@@ -53,6 +57,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Add Poetry to PATH
+        run: echo "${{ needs.setup.outputs.poetry-bin }}" >> $GITHUB_PATH
 
       - name: Run Type Checking (mypy)
         run: poetry run mypy vetnote
@@ -66,6 +73,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Add Poetry to PATH
+        run: echo "${{ needs.setup.outputs.poetry-bin }}" >> $GITHUB_PATH
+
       - name: Run Tests
         run: poetry run pytest --cov=vetnote --cov-report=xml tests
 
@@ -77,6 +87,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Add Poetry to PATH
+        run: echo "${{ needs.setup.outputs.poetry-bin }}" >> $GITHUB_PATH
 
       - name: Run Security Scan (Bandit)
         run: poetry run bandit -r vetnote

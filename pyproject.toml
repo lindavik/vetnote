@@ -1,0 +1,16 @@
+[project]
+name = "aiengineerrecruitmentproject"
+version = "0.1.0"
+description = "A veterinary consultation summarisation tool, generated as part of the NordHealth recruitment process."
+authors = [
+    {name = "lindavik",email = "linda.viksne@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

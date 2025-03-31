@@ -16,9 +16,9 @@ def main():
 
     try:
         file_content = FileReader.read_file(file_path)
-        print(f"Contents of the file:\n{file_content}")
     except FileNotFoundError as e:
         print(f"An exception occurred while reading the input files: {e}")
+        sys.exit(1)
 
     llm_client: LLMClient = OpenAIClient()
     note_generator: NoteGenerator = NoteGenerator(
@@ -27,7 +27,9 @@ def main():
     )
 
     try:
-        discharge_notes = note_generator.generate_discharge_notes(input_text=file_content)
+        discharge_notes = note_generator.generate_discharge_notes(
+            input_text=file_content
+        )
         print(f"Discharge notes: {discharge_notes}")
     except Exception as e:
         print(f"An exception occurred while generating discharge notes: {e}")

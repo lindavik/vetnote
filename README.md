@@ -44,6 +44,8 @@ make the right decision. The solution is not meant to be perfect, but please
 ## Local setup
 
 1. Clone the repository;
+2. You can find the Python version required to run the script in the [pyproject.toml](./pyproject.toml) file. For
+   managing different versions of Python you can use [pyenv](https://github.com/pyenv/pyenv).
 2. Install [poetry](https://python-poetry.org/docs/);
 3. Install the relevant dependencies by running `poetry install`;
 3. The script uses OpenAI under the hood. For this to work the environment variable `OPENAI_API_KEY` must be set

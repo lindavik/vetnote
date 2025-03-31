@@ -8,7 +8,7 @@ One of the features (& most common workflows) is consultations. During a schedul
 patients consultation cards with all details regarding that consultation - this can be the medicine administered,
 treatments performed, observation notes, etc.
 
-After the patient is done with the consultation he usually recieves discharge notes - a set of simple instructions
+After the patient is done with the consultation he usually receives discharge notes - a set of simple instructions
 summarizing what happened during the consultations and what are the next steps the patient should take.
 
 ## Your task
@@ -61,7 +61,8 @@ make the right decision. The solution is not meant to be perfect, but please
 - The GitHub Actions have a lot of duplication but from an effort/gain perspective I decided to keep them as is now.
   They work and can be optimised, cached later;
 - At first, I started by adding data object definitions and validations. However, being conscious of the time limit, I
-  chose to keep the current solution simple and simply read in whatever is in the consultation input files. This has
+  decided to embrace the new trend of agentic workflows and chose to keep the current solution simple and simply read in
+  whatever is in the consultation input files. This has
   drawbacks such as passing too much data to the LLM, potentially increasing the latencies. In this specific case I am
   not concerned about PII data because Enterprise subscriptions specifically state that the prompt data is not persisted
   or used for model training.

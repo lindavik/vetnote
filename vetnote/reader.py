@@ -5,6 +5,7 @@ class FileReader:
     """
     A class to read files and return their contents.
     """
+
     @staticmethod
     def read_file(file_path: str) -> str:
         """

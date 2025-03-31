@@ -6,6 +6,18 @@ from abc import ABC, abstractmethod
 class LLMClient(ABC):
     @abstractmethod
     def predict(self, input_text: str, instructions: str) -> str:
+        """
+        Generates a prediction based on the input text and instructions using an LLM.
+
+        This method sends the input text and instructions to the model to generate a response.
+
+        Args:
+            input_text (str): The input text containing details for the prediction.
+            instructions (str): The instructions to guide the model's response.
+
+        Returns:
+            str: The generated response text from the LLM.
+        """
         pass
 
 

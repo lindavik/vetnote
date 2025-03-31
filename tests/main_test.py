@@ -33,9 +33,9 @@ def test_main_valid_file(capsys, tmp_path):
     mock_note_generator.generate_discharge_notes.return_value = '{"discharge_note": "Test note"}'
 
     with patch.object(sys, "argv", ["main.py", str(temp_file)]):
-        with patch('vetnote.main.FileReader.read_file', return_value="Sample input text"):
-            with patch('vetnote.main.OpenAIClient', return_value=mock_llm_client):
-                with patch('vetnote.main.NoteGenerator', return_value=mock_note_generator):
+        with patch("vetnote.main.FileReader.read_file", return_value="Sample input text"):
+            with patch("vetnote.main.OpenAIClient", return_value=mock_llm_client):
+                with patch("vetnote.main.NoteGenerator", return_value=mock_note_generator):
                     main()
 
     captured = capsys.readouterr()

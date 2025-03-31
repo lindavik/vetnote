@@ -7,12 +7,14 @@ def test_predict_abstract_method():
     with pytest.raises(TypeError):
         LLMClient()
 
+
 @pytest.fixture
-@patch('vetnote.llm_client.OpenAI')
+@patch("vetnote.llm_client.OpenAI")
 def openai_client(MockOpenAI):
     mock_openai_instance = MockOpenAI.return_value
     client = OpenAIClient(model="gpt-4o-mini")
     return client, mock_openai_instance
+
 
 def test_predict(openai_client):
     client, mock_openai_instance = openai_client

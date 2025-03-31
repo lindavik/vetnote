@@ -53,8 +53,10 @@ make the right decision. The solution is not meant to be perfect, but please
    from [here](https://platform.openai.com/settings/organization/api-keys);
 4. Run the script with the path to the JSON file as an argument. For example:
    ```bash
-   poetry run python main.py data/consultation_1.json
+   poetry run python vetnote/main.py data/consultation1.json
    ```
+5. The discharge note will be both printed to the system output and saved in the [solution](./solution) folder. The name
+   of the note will match the name of the input file.
 
 ## Notes on the development process
 

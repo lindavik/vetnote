@@ -33,7 +33,7 @@ class TestFileReader:
             '        "type": "general",\n'
             '        "note": "Doing a lot better, '
             "cough stopped\\nstarted running and "
-            'playing\\neats food without '
+            "playing\\neats food without "
             'issues\\nseems better and more lively overall"\n'
             "      }\n"
             "    ],\n"
@@ -60,21 +60,14 @@ class TestFileReader:
         )
 
     def test_read_file_valid(self, file_reader, expected_file_content):
-        file_path = os.path.join(
-            os.path.dirname(__file__),
-            "data",
-            "consultation.json")
+        file_path = os.path.join(os.path.dirname(__file__), "data", "consultation.json")
 
         actual_file_content = file_reader.read_file(file_path)
 
         assert actual_file_content == expected_file_content
 
     def test_read_file_not_found(self, file_reader):
-        file_path = os.path.join(
-            os.path.dirname(__file__),
-            "data",
-            "non_existent.json")
+        file_path = os.path.join(os.path.dirname(__file__), "data", "non_existent.json")
 
-        with pytest.raises(FileNotFoundError,
-                           match=f"File '{file_path}' not found."):
+        with pytest.raises(FileNotFoundError, match=f"File '{file_path}' not found."):
             file_reader.read_file(file_path)
